@@ -833,10 +833,11 @@ def st_upload(parser, args, output_manager):
                     objs.append(f)
                 elif isdir(f):
                     for (_dir, _ds, _fs) in walk(f):
+                        _dir=_dir.replace('\\','/')
                         if not (_ds + _fs):
                             dir_markers.append(_dir)
                         else:
-                            objs.extend([join(_dir, _f) for _f in _fs])
+                            objs.extend(['/'.join([_dir, _f]) for _f in _fs])
                 else:
                     output_manager.error("Local file '%s' not found" % f)
 
